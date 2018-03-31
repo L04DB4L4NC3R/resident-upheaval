@@ -13,7 +13,7 @@ var session_verify = (req,res,next)=>{
 
 }
 
-app.get('/blocks',session_verify, (req,res)=>{
+app.get('/blocks', (req,res)=>{
 
     chainmodel.find({})
     .then((chain)=>{
