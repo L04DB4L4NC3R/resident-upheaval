@@ -5,7 +5,7 @@ const chainmodel=require('../model/blockchain');
 
 var session_verify = (req,res,next)=>{
     console.log("verifying...");
-    
+
     if(req.session.name === undefined)
         res.json({message:"Forbidden route"});
     else
@@ -42,7 +42,7 @@ app.post('/mine',session_verify,(req,res)=>{
 
                 chainmodel.update({},{$push: {chain:newBlock}})
                 .then(()=>{
-                    var meetingpt = ( (req.body.data.from.location[0]+req.body.data.to.location[0])/2 , (req.body.data.from.location[1]+req.body.data.to.location[1])/2 );
+                    var meetingpt = [req.body.data.from.location[0]+Math.random()*10,req.body.data.from.location[0]+Math.random()*10];//( (req.body.data.from.location[0]+req.body.data.to.location[0])/2 , (req.body.data.from.location[1]+req.body.data.to.location[1])/2 );
                     if(meetingpt===undefined)
                         res.json({message:"Could not display meeting location"});
                     else
