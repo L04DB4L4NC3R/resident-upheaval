@@ -42,13 +42,14 @@ app.post('/mine',session_verify,(req,res)=>{
 
                 chainmodel.update({},{$push: {chain:newBlock}})
                 .then(()=>{
-                    var meetingpt = [req.body.data.from.location[0]+Math.random()*10,req.body.data.from.location[0]+Math.random()*10];//( (req.body.data.from.location[0]+req.body.data.to.location[0])/2 , (req.body.data.from.location[1]+req.body.data.to.location[1])/2 );
-                    if(meetingpt===undefined)
-                        res.json({message:"Could not display meeting location"});
-                    else
+                    if(req.body.data.from === undefined)
+                        res.json(newBlock);
+                    else{
+                        var meetingpt = [req.body.data.from.location[0]+Math.random()*10,req.body.data.from.location[0]+Math.random()*10];//( (req.body.data.from.location[0]+req.body.data.to.location[0])/2 , (req.body.data.from.location[1]+req.body.data.to.location[1])/2 );
                         res.json({
                             meeting_location:meetingpt
                         });
+                    }
                 }).catch(err=>console.log(err));
 
 

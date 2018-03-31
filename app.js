@@ -17,11 +17,16 @@ var app = express();
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended:false}));
 
+
 //set up a session (It uses cookies)
 app.use(session({secret:secret.cookieSecretKey,
                         saveUninitialized:false,
                         resave:false
                     }));
+
+app.get('/',(req,res)=>{
+    res.json({message:"Welcome to Resident-upheaval"});
+});
 
 app.use(mainRouter);
 app.use(loginRouter);
